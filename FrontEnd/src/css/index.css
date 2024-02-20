@@ -8,7 +8,13 @@ body {
   background-color: black;
   color: whitesmoke;
 }
-
+* {
+  /*outline: 1px solid red;*/
+  scrollbar-width: none;
+}
+.navbarpadding {
+  margin-top: 60px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

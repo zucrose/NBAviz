@@ -75,6 +75,7 @@ export default function TeamRatingsTable({ data }) {
                   )
                 ) : null}
               </th>
+              <th>logo</th>
             </tr>
           </thead>
           <tbody>
@@ -91,6 +92,10 @@ export default function TeamRatingsTable({ data }) {
                   <td>{element.offRating.toPrecision(4)}</td>
                   <td>{element.defRating.toPrecision(4)}</td>
                   <td>{element.netRating.toPrecision(3)}</td>
+                  <td>
+                    {console.log(element)}
+                    <i src={"logos/" + element.logo}></i>
+                  </td>
                 </tr>
               );
             })}

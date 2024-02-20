@@ -5,6 +5,7 @@ import axios from "axios";
 import useTableSort from "./useTableSort";
 import PointsVsEffTable from "./pointsVsEffTable";
 import { serverUrl } from "../utils/constants";
+import Navbar from "./navbar";
 export default function PointsVsEfg() {
   const chartRef = useRef();
   const [ptsefg, setPtsefg] = useState(null);
@@ -50,8 +51,9 @@ export default function PointsVsEfg() {
 
   return (
     <>
+      <Navbar></Navbar>
       {ptsefg !== null ? (
-        <div className="container">
+        <div className="container navbarpadding">
           <div className="d-flex justify-content-center mt-5">
             <div ref={chartRef} />
           </div>

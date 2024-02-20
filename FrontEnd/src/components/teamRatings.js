@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { serverUrl } from "../utils/constants";
 import * as Plot from "@observablehq/plot";
 import TeamRatingsTable from "./teamRatingsTable";
-import { arrMax, arrMin } from "../utils/arrayFunctions";
+import { Addlogo, arrMax, arrMin } from "../utils/arrayFunctions";
+import Navbar from "./navbar";
 export default function TeamRatings() {
   const [teamRatingsArray, setTeamRatingsArray] = useState(null);
   const [selectSeason, setSelectSeason] = useState("2023-24");
@@ -18,8 +19,13 @@ export default function TeamRatings() {
         LastNGames: lastN,
       },
     });
+    const arr = data;
+    if (arr != null)
+      arr.ratings.map((e, i) => {
+        arr.ratings[i]["logo"] = Addlogo(e.teamName);
+      });
+    setTeamRatingsArray(arr);
     // console.log(data);
-    setTeamRatingsArray(data);
   };
   //console.log(teamRatingsArray);
   console.log(selectLastNGames, selectSeason);
@@ -75,11 +81,12 @@ export default function TeamRatings() {
   }, [teamRatingsArray]);
   return (
     <>
+      <Navbar></Navbar>
       {teamRatingsArray !== null ? (
-        <div className="container">
+        <div className="container navbarpadding">
           {" "}
           <div className="d-flex justify-content-center">
-            <div className="row  mt-5">
+            <div className="row  ">
               <select
                 value={selectSeason}
                 onChange={(e) => setSelectSeason(e.target.value)}
@@ -107,6 +114,11 @@ export default function TeamRatings() {
             <div className="table-responsive my-5">
               <TeamRatingsTable data={teamRatingsArray.ratings} />
             </div>
+          </div>
+          <div>
+            {teamRatingsArray.ratings.map((element) => {
+              return <i src={"logos/" + element.logo} alt="image" />;
+            })}
           </div>
         </div>
       ) : (

@@ -14,3 +14,9 @@ export const arrMin = (arr, prop) => {
   });
   return mini;
 };
+export const Addlogo = (team) => {
+  const teamsplit = team.split(" ");
+  const last = teamsplit[teamsplit.length - 1].toLowerCase();
+  const url = last + "logo.png";
+  return url;
+};

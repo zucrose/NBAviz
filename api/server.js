@@ -6,24 +6,27 @@ const axios = require("axios");
 const app = express();
 app.use(cors());
 dotenv.config();
+let allPlayers = [];
+let allTeams = [...nba.teams];
 
-app.get("/deadpage", async (req, res) => {
-  const STATS_HEADERS = {
-    Host: "stats.nba.com",
-    "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0",
-    Accept: "application/json, text/plain, */*",
-    "Accept-Language": "en-US,en;q=0.5",
-    "Accept-Encoding": "gzip, deflate, br",
-    Connection: "keep-alive",
-  };
-  const { data: data } = await axios.get(
-    "https://stats.nba.com/stats/homepagev2?GameScope=Season&LeagueID=00&PlayerOrTeam=Team&PlayerScope=All+Players&Season=2023-24&SeasonType=Regular+Season&StatType=Advanced",
-    { headers: STATS_HEADERS }
-  );
-  console, log(data);
-  res.send(data);
-});
+const getPlayers = async () => {
+  await nba.stats
+    .playersInfo({
+      LeagueID: "00",
+      Season: "2023-24",
+      IsOnlyCurrentSeason: "0",
+    })
+    .then((data) => {
+      data.forEach((e) => {
+        e["fullName"] = e.firstName + " " + e.lastName;
+      });
+      allPlayers = [...data];
+    });
+};
+getPlayers();
+setInterval(() => {
+  getPlayers();
+}, 100000000);
 
 app.get("/teamRatings", (req, res) => {
   let avgDefRating = 0,
@@ -137,7 +140,21 @@ app.get("/getPtsVsEfg", async (req, res) => {
     res.json(obj);
   });
 });
-
+app.get("/search", (req, res) => {
+  const finding = req.query.name.toLowerCase();
+  let ans1 = [
+    ...allTeams.filter((e) => {
+      if (e.teamName.toLowerCase().includes(finding)) return e;
+      if (e.abbreviation.toLowerCase().includes(finding)) return e;
+    }),
+  ];
+  let ans2 = [
+    ...allPlayers.filter((e) => {
+      if (e.fullName.toLowerCase().includes(finding)) return e;
+    }),
+  ];
+  res.send({ players: ans2, teams: ans1 });
+});
 const port = 3001;
 app.listen(port, () => {
   console.log("server running");
