@@ -27,6 +27,27 @@ getPlayers();
 setInterval(() => {
   getPlayers();
 }, 100000000);
+app.get("/shots", (req, res) => {
+  console.log(req.query.pid);
+  const params = {
+    PlayerID: req.query.pid,
+    Season: req.query.Season,
+    SeasonType: req.query.SeasonType,
+    LeagueID: "00",
+    TeamID: "0",
+    ContextMeasure: "FGM",
+    MeasureType: "Base",
+    PerMode: "PerGame",
+    PlusMinus: "N",
+    PaceAdjust: "N",
+    Rank: "N",
+    Month: "0",
+    OpponentTeamID: "0",
+    Period: "0",
+    LastNGames: "0",
+  };
+  nba.stats.shots(params).then((data) => res.send(data));
+});
 
 app.get("/teamRatings", (req, res) => {
   let avgDefRating = 0,
@@ -139,6 +160,14 @@ app.get("/getPtsVsEfg", async (req, res) => {
     };
     res.json(obj);
   });
+});
+app.get("/playerInfo", async (req, res) => {
+  const playerInfoParams = {
+    PlayerID: req.query.PlayerID,
+    SeasonType: "Regular Season",
+    LeagueID: "00",
+  };
+  nba.stats.playerInfo(playerInfoParams).then((data) => res.send(data));
 });
 app.get("/search", (req, res) => {
   const finding = req.query.name.toLowerCase();
