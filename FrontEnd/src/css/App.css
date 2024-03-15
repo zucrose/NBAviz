@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+.tip {
+  font-style: normal;
+  position: relative;
+}
+.tip .tooltiptext {
+  background-color: #2a2c32;
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 10px;
+  bottom: 100%;
+  left: 20%;
+  border-style: solid;
+  border-color: rgb(60, 59, 57);
+}
+.tip:hover .tooltiptext {
+  visibility: visible;
+}

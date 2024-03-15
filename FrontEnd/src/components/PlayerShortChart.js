@@ -33,6 +33,7 @@ export default function PlayerShortChart({ playerID }) {
           value={selectSeason}
           onChange={(e) => setSelectSeason(e.target.value)}
           className="col m-2"
+          style={{ backgroundColor: "black", color: "white" }}
         >
           <option>2021-22</option>
           <option>2022-23</option>
@@ -42,6 +43,7 @@ export default function PlayerShortChart({ playerID }) {
           value={seasonType}
           onChange={(e) => setSeasonType(e.target.value)}
           className="col m-2"
+          style={{ backgroundColor: "black", color: "white" }}
         >
           <option>Regular Season</option>
           <option>Playoffs</option>

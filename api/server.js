@@ -164,10 +164,26 @@ app.get("/getPtsVsEfg", async (req, res) => {
 app.get("/playerInfo", async (req, res) => {
   const playerInfoParams = {
     PlayerID: req.query.PlayerID,
-    SeasonType: "Regular Season",
+    SeasonType: req.query.SeasonType,
     LeagueID: "00",
   };
-  nba.stats.playerInfo(playerInfoParams).then((data) => res.send(data));
+  let playerInfoData;
+  await nba.stats
+    .playerInfo(playerInfoParams)
+    .then((data) => (playerInfoData = data));
+  const playerProfileParams = {
+    PlayerID: req.query.PlayerID,
+    LeagueID: "00",
+    PerMode: req.query.PerMode,
+  };
+  let playerProfileData;
+  await nba.stats
+    .playerProfile(playerProfileParams)
+    .then((data) => (playerProfileData = data));
+  res.send({
+    playerProfile: playerProfileData,
+    playerInfo: playerInfoData,
+  });
 });
 app.get("/search", (req, res) => {
   const finding = req.query.name.toLowerCase();

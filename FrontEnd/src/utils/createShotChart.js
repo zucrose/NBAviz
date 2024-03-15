@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import * as htl from "htl";
 export default function createShortChart(shotChart, chartRef) {
   if (shotChart === null) return;
+  console.log(shotChart.shot_Chart_Detail);
   function markings({
     stroke = "currentColor",
     strokeWidth = 1,
@@ -70,27 +71,25 @@ export default function createShortChart(shotChart, chartRef) {
     x: { domain: [-250, 250] },
     y: { domain: [-50, 450] },
     color: {
-      type: "log",
-      scheme: "ylgnbu",
+      domain: ["Made Shot", "Missed Shot"],
+      range: ["#7CFC00", "#8B0000"],
       legend: true,
-      label: "Made shots",
     },
     marks: [
-      Plot.rect(
-        shotChart.shot_Chart_Detail,
-        Plot.bin(
-          { fill: "count" },
-          {
-            x: "locX",
-            y: "locY",
-            filter: (d) => +d.shotMadeFlag,
-            inset: 0,
-            interval: 5,
-          }
-        )
-      ),
-      Plot.gridX({ interval: 5, strokeOpacity: 0.05 }),
-      Plot.gridY({ interval: 5, strokeOpacity: 0.05 }),
+      Plot.dot(shotChart.shot_Chart_Detail, {
+        x: "locX",
+        y: "locY",
+
+        inset: 0,
+        interval: 5,
+        fill: (d) => (d.shotMadeFlag === 1 ? "#7CFC00" : "#8B0000"),
+        title: (d) =>
+          `  ${d.eventType} \n Distance: ${d.shotDistance} ft \n Shot Type : ${d.actionType} \n`,
+        stroke: "white",
+        strokeWidth: 1,
+        r: 5,
+      }),
+
       markings(),
     ],
   });
