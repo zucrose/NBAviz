@@ -1,6 +1,6 @@
-import useTableSort from "./useTableSort";
+import useTableSort from "../useTableSort";
 
-export default function TeamRatingsTable({ data }) {
+export default function PointsVsEffTable({ data }) {
   const { sortedData, requestSort, sortConfig } = useTableSort(data);
 
   return (
@@ -9,10 +9,9 @@ export default function TeamRatingsTable({ data }) {
         <table className="table table-dark table-striped">
           <thead>
             <tr>
-              <th>S.No</th>
-              <th onClick={() => requestSort("teamName")}>
-                Team{" "}
-                {sortConfig.columnName === "teamName" ? (
+              <th onClick={() => requestSort("player")}>
+                Name (team){" "}
+                {sortConfig.columnName === "player" ? (
                   sortConfig.dir === "asc" ? (
                     <i class="bi bi-sort-alpha-down"></i>
                   ) : (
@@ -24,9 +23,9 @@ export default function TeamRatingsTable({ data }) {
                 ) : null}
               </th>
 
-              <th onClick={() => requestSort("w")}>
-                Wins-Loss
-                {sortConfig.columnName === "w" ? (
+              <th onClick={() => requestSort("PointsPerGame")}>
+                Points Per Game{" "}
+                {sortConfig.columnName === "PointsPerGame" ? (
                   sortConfig.dir === "asc" ? (
                     <i class="bi bi-sort-numeric-down"></i>
                   ) : (
@@ -35,9 +34,9 @@ export default function TeamRatingsTable({ data }) {
                 ) : null}
               </th>
 
-              <th onClick={() => requestSort("wPct")}>
-                Win%
-                {sortConfig.columnName === "wPct" ? (
+              <th onClick={() => requestSort("PointsPerMinute")}>
+                Points per Minute{" "}
+                {sortConfig.columnName === "PointsPerMinute" ? (
                   sortConfig.dir === "asc" ? (
                     <i class="bi bi-sort-numeric-down"></i>
                   ) : (
@@ -45,9 +44,9 @@ export default function TeamRatingsTable({ data }) {
                   )
                 ) : null}
               </th>
-              <th onClick={() => requestSort("offRating")}>
-                Offensive Rating
-                {sortConfig.columnName === "offRating" ? (
+              <th onClick={() => requestSort("TrueShooting")}>
+                True Shooting %{" "}
+                {sortConfig.columnName === "TrueShooting" ? (
                   sortConfig.dir === "asc" ? (
                     <i class="bi bi-sort-numeric-down"></i>
                   ) : (
@@ -55,9 +54,9 @@ export default function TeamRatingsTable({ data }) {
                   )
                 ) : null}
               </th>
-              <th onClick={() => requestSort("defRating")}>
-                Defensive Rating
-                {sortConfig.columnName === "defRating" ? (
+              <th onClick={() => requestSort("efg")}>
+                Effective Field Goal %{" "}
+                {sortConfig.columnName === "efg" ? (
                   sortConfig.dir === "asc" ? (
                     <i class="bi bi-sort-numeric-down"></i>
                   ) : (
@@ -65,37 +64,20 @@ export default function TeamRatingsTable({ data }) {
                   )
                 ) : null}
               </th>
-              <th onClick={() => requestSort("netRating")}>
-                Net Rating
-                {sortConfig.columnName === "netRating" ? (
-                  sortConfig.dir === "asc" ? (
-                    <i class="bi bi-sort-numeric-down"></i>
-                  ) : (
-                    <i class="bi bi-sort-numeric-down-alt"></i>
-                  )
-                ) : null}
-              </th>
-              <th>logo</th>
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((element, index) => {
+            {sortedData.map((element) => {
               //console.log(element);
               return (
                 <tr>
-                  <td>{index + 1}</td>
-                  <td>{element.teamName}</td>
                   <td>
-                    {element.w}-{element.l}
+                    {element.player}({element.Team})
                   </td>
-                  <td>{element.wPct.toPrecision(3)}</td>
-                  <td>{element.offRating.toPrecision(4)}</td>
-                  <td>{element.defRating.toPrecision(4)}</td>
-                  <td>{element.netRating.toPrecision(3)}</td>
-                  <td>
-                    {console.log(element)}
-                    <i src={"logos/" + element.logo}></i>
-                  </td>
+                  <td>{element.PointsPerGame}</td>
+                  <td>{element.PointsPerMinute.toPrecision(3)}</td>
+                  <td>{element.TrueShooting.toPrecision(3)}</td>
+                  <td>{element.efg.toPrecision(3)}</td>
                 </tr>
               );
             })}

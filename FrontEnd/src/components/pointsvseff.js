@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as Plot from "@observablehq/plot";
 
 import axios from "axios";
-import useTableSort from "./useTableSort";
-import PointsVsEffTable from "./pointsVsEffTable";
+
+import PointsVsEffTable from "./tables/pointsVsEffTable";
 import { serverUrl } from "../utils/constants";
 import Navbar from "./navbar";
 export default function PointsVsEfg() {

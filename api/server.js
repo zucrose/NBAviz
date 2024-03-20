@@ -92,15 +92,43 @@ app.get("/teamRatings", (req, res) => {
     });
   });
 });
+
+app.get("/scoreboard", async (req, res) => {
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  const today = `${year}-${month}-${day}`;
+
+  const params = {
+    LeagueID: "00",
+    Season: "2023-24",
+    SeasonType: "Regular Season",
+  };
+  nba.stats.leagueStandings(params).then((data) => {
+    let eastTeams = [],
+      westTeams = [];
+    data.resultSets[0].rowSet.forEach((element) => {
+      let obj = {};
+      data.resultSets[0].headers.forEach((x, index) => {
+        obj[x] = element[index];
+      });
+      if (obj.Conference == "West") westTeams.push(obj);
+      else eastTeams.push(obj);
+    });
+    res.send({ eastTeams: eastTeams, westTeams: westTeams });
+  });
+});
+
 app.get("/homepage", async (req, res) => {
   const params = {
     GameScope: "Season",
     LeagueID: "00",
-    PlayerOrTeam: "Team",
+    PlayerOrTeam: req.query.PlayerOrTeam,
     PlayerScope: "All Players",
     Season: "2023-24",
-    SeasonType: "Regular Season",
-    StatType: "Advanced",
+    StatType: "Traditional",
   };
   nba.stats.homepageV2(params).then((d) => res.send(d));
 });

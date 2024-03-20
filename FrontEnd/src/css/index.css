@@ -9,7 +9,7 @@ body {
   color: whitesmoke;
 }
 * {
-  /*outline: 1px solid red;*/
+  /* outline: 1px solid red;*/
   scrollbar-width: none;
 }
 .navbarpadding {
@@ -22,4 +22,7 @@ code {
 .table-responsive {
   max-height: 300px;
   max-width: 700px;
+}
+.btn-dark {
+  background-color: #111111;
 }

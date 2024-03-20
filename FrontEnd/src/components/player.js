@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 import { serverUrl } from "../utils/constants";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import PlayerStatsTable from "./PlayerStatsTable";
+import PlayerStatsTable from "./tables/PlayerStatsTable";
 
 export default function Player() {
   const { state } = useLocation();

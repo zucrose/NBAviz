@@ -1,8 +1,8 @@
 import {
   playerPercentileRgb,
   playerPercentileRgbRig,
-} from "../utils/arrayFunctions";
-import useTableSort from "./useTableSort";
+} from "../../utils/arrayFunctions";
+import useTableSort from "../useTableSort";
 
 export default function PlayerStatsTable({ playerStats }) {
   const { sortedData, requestSort, sortConfig } = useTableSort(

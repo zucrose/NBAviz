@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { serverUrl } from "../utils/constants";
 import * as Plot from "@observablehq/plot";
-import TeamRatingsTable from "./teamRatingsTable";
+import TeamRatingsTable from "./tables/teamRatingsTable";
 import { Addlogo, arrMax, arrMin } from "../utils/arrayFunctions";
 import Navbar from "./navbar";
 export default function TeamRatings() {

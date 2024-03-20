@@ -30,6 +30,9 @@ export default function Navbar() {
         className="navbar  fixed-top "
         style={{ backgroundColor: "#0c0d0d", height: "60px" }}
       >
+        <Link to="/" className="nav-link mx-3">
+          NBAVIZ
+        </Link>
         <Link to="/teamRatings" className="nav-link mx-3">
           Teams
         </Link>
