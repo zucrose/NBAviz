@@ -4,6 +4,7 @@ import PointsVsEfg from "./components/pointsvseff";
 import TeamRatings from "./components/teamRatings";
 import Player from "./components/player";
 import Home from "./components/home";
+import Team from "./components/Team";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/ptsefg" element={<PointsVsEfg />}></Route>
           <Route exact path="/teamRatings" element={<TeamRatings />}></Route>
           <Route exact path="/players" element={<Player />}></Route>
+          <Route exact path="/team" element={<Team />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

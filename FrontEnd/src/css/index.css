@@ -26,3 +26,14 @@ code {
 .btn-dark {
   background-color: #111111;
 }
+.colTab.nav-tabs .nav-link {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.colTab.nav-tabs .nav-link.active {
+  border-bottom: solid 4px blue !important;
+}

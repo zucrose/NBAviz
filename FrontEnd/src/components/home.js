@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "./navbar";
 import Statleader from "./StatLeader";
 import Standings from "./Standings";
+import TeamLeaders from "./TeamLeaders";
 
 export default function Home() {
   const [statLeaders, setStatLeaders] = useState();
@@ -37,8 +38,13 @@ export default function Home() {
       <Navbar></Navbar>
       {statLeaders != undefined && standingData != undefined ? (
         <div className=" navbarpadding ">
-          <div className="d-flex justify-content-around align-items-start p-5">
-            <Statleader statLeaders={statLeaders}></Statleader>
+          <div className="d-flex align-items-start p-5">
+            <div className=" d-flex row">
+              <Statleader statLeaders={statLeaders}></Statleader>
+
+              <TeamLeaders teamData={teamLeaders}></TeamLeaders>
+            </div>
+
             <Standings standingData={standingData}></Standings>
           </div>
         </div>
