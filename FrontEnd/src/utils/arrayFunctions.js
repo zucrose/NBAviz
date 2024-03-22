@@ -53,3 +53,34 @@ export const playerPercentileRgbRig = (val) => {
   const str = r + "," + g + "," + b;
   return str;
 };
+export const TeamPercentileRgbRig = (val) => {
+  if (val == null) return "33,37,41";
+  let r,
+    g,
+    b = 0;
+
+  if (val < 15) {
+    r = Math.floor(255 * (val / 15));
+    g = 255;
+  } else {
+    g = Math.floor(255 * ((15 - (val % 15)) / 15));
+    r = 255;
+  }
+  const str = r + "," + g + "," + b;
+  return str;
+};
+
+export default function rankSuffix(i) {
+  let j = i % 10,
+    k = i % 100;
+  if (j === 1 && k !== 11) {
+    return i + "st";
+  }
+  if (j === 2 && k !== 12) {
+    return i + "nd";
+  }
+  if (j === 3 && k !== 13) {
+    return i + "rd";
+  }
+  return i + "th";
+}

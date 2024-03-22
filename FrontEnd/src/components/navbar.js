@@ -16,7 +16,7 @@ export default function Navbar() {
           name: searchValue,
         },
       });
-      console.log(data);
+      //  console.log(data);
       setSearchResult(data);
       setToggleSearch(true);
     }
@@ -70,7 +70,16 @@ export default function Navbar() {
                 }}
               >
                 {searchResult.teams.map((e) => (
-                  <div className="mb-2">{e.teamName}</div>
+                  <div
+                    className="mb-2"
+                    onClick={() =>
+                      navigate("/team", {
+                        state: { teamID: e.teamId },
+                      })
+                    }
+                  >
+                    {e.teamName}
+                  </div>
                 ))}
                 {searchResult.players.map((e) => (
                   <div

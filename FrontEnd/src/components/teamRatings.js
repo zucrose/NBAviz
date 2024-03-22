@@ -27,7 +27,7 @@ export default function TeamRatings() {
     setTeamRatingsArray(arr);
     // console.log(data);
   };
-  //console.log(teamRatingsArray);
+  console.log(teamRatingsArray);
   console.log(selectLastNGames, selectSeason);
   useEffect(() => {
     getTeamRating();

@@ -39,6 +39,7 @@
 .tip {
   font-style: normal;
   position: relative;
+  background-color: transparent;
 }
 .tip .tooltiptext {
   background-color: #2a2c32;

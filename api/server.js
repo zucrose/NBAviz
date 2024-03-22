@@ -48,6 +48,67 @@ app.get("/shots", (req, res) => {
   };
   nba.stats.shots(params).then((data) => res.send(data));
 });
+app.get("/teamStats", async (req, res) => {
+  let obj = {};
+  const params1 = {
+    MeasureType: "Advanced",
+    PerMode: "Per100Possessions",
+    PlusMinus: "Y",
+    PaceAdjust: "Y",
+    Rank: "Y",
+    LeagueID: "00",
+    Season: req.query.Season,
+    TeamID: "",
+    Outcome: "",
+    Location: "",
+    Month: "0",
+    SeasonSegment: "",
+    DateFrom: "",
+    DateTo: "",
+    OpponentTeamID: "0",
+    VsConference: "",
+    VsDivision: "",
+    GameSegment: "",
+    Period: "0",
+    LastNGames: req.query.LastNGames,
+    SeasonType: "Regular Season",
+  };
+  await nba.stats.teamStats(params1).then((d) => (obj["advanced"] = d));
+
+  const params2 = {
+    MeasureType: "Base",
+    PerMode: "PerGame",
+    PlusMinus: "N",
+    PaceAdjust: "Y",
+    Rank: "N",
+    LeagueID: "00",
+    Season: req.query.Season,
+    TeamID: "",
+    Outcome: "",
+    Location: "",
+    Month: "0",
+    SeasonSegment: "",
+    DateFrom: "",
+    DateTo: "",
+    OpponentTeamID: "0",
+    VsConference: "",
+    VsDivision: "",
+    GameSegment: "",
+    Period: "0",
+    LastNGames: req.query.LastNGames,
+    SeasonType: "Regular Season",
+  };
+  await nba.stats.teamStats(params2).then((d) => (obj.base = d));
+
+  const params3 = {
+    LeagueID: "00",
+    Season: "",
+    TeamID: req.query.TeamID,
+    SeasonType: "",
+  };
+  await nba.stats.teamInfoCommon(params3).then((d) => (obj.commonInfo = d));
+  await res.send(obj);
+});
 
 app.get("/teamRatings", (req, res) => {
   let avgDefRating = 0,
